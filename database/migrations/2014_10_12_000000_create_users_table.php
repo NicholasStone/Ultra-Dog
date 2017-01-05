@@ -21,9 +21,19 @@ class CreateUsersTable extends Migration
 			$table->increments('id');
 			$table->string('name');
 			$table->string('email')->unique();
-			$table->string('password')->nullable();
+			$table->string('password');
 			$table->rememberToken();
-			$table->timestamps();
+			$table->string('tel',16)->nullable();
+			$table->string('qq',10)->nullable();
+			$table->string('we_chat',50)->nullable();
+			$table->string('real_name')->nullable();
+			$table->boolean('gender')->nullable();
+			$table->date('birthday')->nullable();
+			$table->char('id_number',18)->nullable();
+			$table->tinyInteger('edu_background')->nullable();
+			$table->text('resume')->nullable();
+			$table->string('avatar')->nullable();
+            $table->timestamps();
         });
     }
 
