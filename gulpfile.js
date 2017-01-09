@@ -1,7 +1,7 @@
-const elixir = require('laravel-elixir');
+import elixir from "laravel-elixir";
+import laravel_elixir_webpack_ex from "laravel-elixir-webpack-ex";
+import laravel_elixir_vue_2 from "laravel-elixir-vue-2";
 
-require('laravel-elixir-vue-2');
-require('./elixir-extensions');
 
 /*
  |--------------------------------------------------------------------------
@@ -81,11 +81,6 @@ elixir((mix) => {
     .webpack('backend/app.js', './resources/assets/js/dist/backend.js')
 
     /**
-     * Make RTL (Right To Left) CSS stylesheet for the backend
-     */
-    .rtlCss()
-
-    /**
      * Combine backend scripts
      */
     .scripts([
@@ -95,13 +90,6 @@ elixir((mix) => {
         'plugins.js',
         'backend/custom.js'
     ], 'public/js/backend.js')
-
-    /**
-     * Combine pre-processed rtl CSS files
-     */
-    .styles([
-        'rtl/bootstrap-rtl.css'
-    ], 'public/css/rtl.css')
 
     /**
      * Apply version control
