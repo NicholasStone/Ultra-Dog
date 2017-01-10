@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel 5 Bootstrap',
+    'name' => '四狗兼职信息发布平台',
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://lz.app'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Shanghai',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +185,7 @@ return [
 		HieuLe\Active\ActiveServiceProvider::class,
 		Laravel\Socialite\SocialiteServiceProvider::class,
 		Yajra\Datatables\DatatablesServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
 		/*
 		 * Has to override the Collective\Html\HtmlServiceProvider form singleton

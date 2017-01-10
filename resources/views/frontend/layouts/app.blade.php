@@ -18,10 +18,10 @@
 
         {{ Html::style(elixir('css/frontend.css')) }}
 
-        <!-- Check if the language is set to RTL, so apply the RTL layouts -->
-        @langRTL
-            {!! Html::style(elixir('css/rtl.css')) !!}
-        @endif
+        {{--<!-- Check if the language is set to RTL, so apply the RTL layouts -->--}}
+        {{--@langRTL--}}
+            {{--{!! Html::style(elixir('css/rtl.css')) !!}--}}
+        {{--@endif--}}
 
         @yield('after-styles')
 

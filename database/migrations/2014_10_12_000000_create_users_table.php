@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
 			$table->boolean('gender')->nullable();
 			$table->date('birthday')->nullable();
 			$table->char('id_number',18)->nullable();
-			$table->tinyInteger('edu_background')->nullable();
+			$table->string('university')->nullable();
 			$table->text('resume')->nullable();
 			$table->string('avatar')->nullable();
             $table->timestamps();

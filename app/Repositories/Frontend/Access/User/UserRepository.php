@@ -4,6 +4,7 @@ namespace App\Repositories\Frontend\Access\User;
 
 use App\Models\Access\User\User;
 use App\Repositories\Repository;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,8 @@ use App\Models\Access\User\SocialLogin;
 use App\Events\Frontend\Auth\UserConfirmed;
 use App\Repositories\Backend\Access\Role\RoleRepository;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
+use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\Types\Array_;
 
 /**
  * Class UserRepository
@@ -18,10 +21,10 @@ use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
  */
 class UserRepository extends Repository
 {
-	/**
-	 * Associated Repository Model
-	 */
-	const MODEL = User::class;
+    /**
+     * Associated Repository Model
+     */
+    const MODEL = User::class;
 
     /**
      * @var RoleRepository
@@ -40,7 +43,8 @@ class UserRepository extends Repository
      * @param $email
      * @return bool
      */
-    public function findByEmail($email) {
+    public function findByEmail($email)
+    {
         return $this->query()->where('email', $email)->first();
     }
 
@@ -49,20 +53,22 @@ class UserRepository extends Repository
      * @return mixed
      * @throws GeneralException
      */
-    public function findByToken($token) {
+    public function findByToken($token)
+    {
         return $this->query()->where('confirmation_code', $token)->first();
     }
 
-	/**
-	 * @param $token
-	 * @return mixed
-	 * @throws GeneralException
-	 */
-	public function getEmailForPasswordToken($token) {
-		if ($row = DB::table('password_resets')->where('token', $token)->first())
-			return $row->email;
-		throw new GeneralException(trans('auth.unknown'));
-	}
+    /**
+     * @param $token
+     * @return mixed
+     * @throws GeneralException
+     */
+    public function getEmailForPasswordToken($token)
+    {
+        if ($row = DB::table('password_resets')->where('token', $token)->first())
+            return $row->email;
+        throw new GeneralException(trans('auth.unknown'));
+    }
 
     /**
      * @param array $data
@@ -71,51 +77,51 @@ class UserRepository extends Repository
      */
     public function create(array $data, $provider = false)
     {
-    	$user = self::MODEL;
-    	$user = new $user;
-		$user->name = $data['name'];
-		$user->email = $data['email'];
-		$user->confirmation_code = md5(uniqid(mt_rand(), true));
-		$user->status = 1;
-		$user->password = $provider ? null : bcrypt($data['password']);
-		$user->confirmed = $provider ? 1 : (config('access.users.confirm_email') ? 0 : 1);
+        $user                    = self::MODEL;
+        $user                    = new $user;
+        $user->name              = $data['name'];
+        $user->email             = $data['email'];
+        $user->confirmation_code = md5(uniqid(mt_rand(), true));
+        $user->status            = 1;
+        $user->password          = $provider ? null : bcrypt($data['password']);
+        $user->confirmed         = $provider ? 1 : (config('access.users.confirm_email') ? 0 : 1);
 
-		DB::transaction(function() use ($user) {
-			if (parent::save($user)) {
-				/**
-				 * Add the default site role to the new user
-				 */
-				$user->attachRole($this->role->getDefaultUserRole());
-			}
-		});
+        DB::transaction(function () use ($user) {
+            if (parent::save($user)) {
+                /**
+                 * Add the default site role to the new user
+                 */
+                $user->attachRole($this->role->getDefaultUserRole());
+            }
+        });
 
-		/**
-		 * If users have to confirm their email and this is not a social account,
-		 * send the confirmation email
-		 *
-		 * If this is a social account they are confirmed through the social provider by default
-		 */
-		if (config('access.users.confirm_email') && $provider === false) {
-			$user->notify(new UserNeedsConfirmation($user->confirmation_code));
-		}
+        /**
+         * If users have to confirm their email and this is not a social account,
+         * send the confirmation email
+         *
+         * If this is a social account they are confirmed through the social provider by default
+         */
+        if (config('access.users.confirm_email') && $provider === false) {
+            $user->notify(new UserNeedsConfirmation($user->confirmation_code));
+        }
 
-		/**
-		 * Return the user object
-		 */
-		return $user;
+        /**
+         * Return the user object
+         */
+        return $user;
     }
 
-	/**
-	 * @param $data
-	 * @param $provider
-	 * @return UserRepository|bool
-	 */
-	public function findOrCreateSocial($data, $provider)
+    /**
+     * @param $data
+     * @param $provider
+     * @return UserRepository|bool
+     */
+    public function findOrCreateSocial($data, $provider)
     {
         /**
          * User email may not provided.
          */
-        $user_email = $data->email ? : "{$data->id}@{$provider}.com";
+        $user_email = $data->email ?: "{$data->id}@{$provider}.com";
 
         /**
          * Check to see if there is a user with this email first
@@ -127,7 +133,7 @@ class UserRepository extends Repository
          * The true flag indicate that it is a social account
          * Which triggers the script to use some default values in the create method
          */
-        if (! $user) {
+        if (!$user) {
             $user = $this->create([
                 'name'  => $data->name,
                 'email' => $user_email,
@@ -137,7 +143,7 @@ class UserRepository extends Repository
         /**
          * See if the user has logged in with this social account before
          */
-        if (! $user->hasProvider($provider)) {
+        if (!$user->hasProvider($provider)) {
             /**
              * Gather the provider data for saving and associate it with the user
              */
@@ -152,8 +158,8 @@ class UserRepository extends Repository
              * Update the users information, token and avatar can be updated.
              */
             $user->providers()->update([
-                'token'       => $data->token,
-                'avatar'      => $data->avatar,
+                'token'  => $data->token,
+                'avatar' => $data->avatar,
             ]);
         }
 
@@ -179,7 +185,8 @@ class UserRepository extends Repository
         if ($user->confirmation_code == $token) {
             $user->confirmed = 1;
 
-			event(new UserConfirmed($user));
+            event(new UserConfirmed($user));
+
             return parent::save($user);
         }
 
@@ -192,10 +199,9 @@ class UserRepository extends Repository
      * @return mixed
      * @throws GeneralException
      */
-    public function updateProfile($id, $input)
+    public function updateProfile($id, Array $input)
     {
-        $user = parent::find($id);
-        $user->name = $input['name'];
+        $user             = parent::find($id);
 
         if ($user->canChangeEmail()) {
             //Address is not current address
@@ -207,9 +213,11 @@ class UserRepository extends Repository
 
                 $user->email = $input['email'];
             }
+        }else{
+            unset($input['email']);
         }
 
-        return parent::save($user);
+        return parent::update($user, $input);
     }
 
     /**
@@ -223,6 +231,7 @@ class UserRepository extends Repository
 
         if (Hash::check($input['old_password'], $user->password)) {
             $user->password = bcrypt($input['password']);
+
             return parent::save($user);
         }
 

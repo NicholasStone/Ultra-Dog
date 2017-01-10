@@ -52,7 +52,7 @@ class User extends Authenticatable
         'gender',
         'birthday',
         'id_number',
-        'edu_background',
+        'university',
         'resume',
         'avatar',
         'created_at',

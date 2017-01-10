@@ -2,8 +2,8 @@
 
 namespace App\Helpers\Macros;
 
+use App\Helpers\Macros\Traits\ProfileEdit;
 use Collective\Html\FormBuilder;
-use App\Helpers\Macros\Traits\Dropdowns;
 
 /**
  * Class Macros
@@ -11,5 +11,5 @@ use App\Helpers\Macros\Traits\Dropdowns;
  */
 class Macros extends FormBuilder
 {
-	use Dropdowns;
+	use ProfileEdit;
 }
