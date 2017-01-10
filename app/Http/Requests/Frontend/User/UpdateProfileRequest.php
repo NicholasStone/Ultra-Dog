@@ -28,9 +28,27 @@ class UpdateProfileRequest extends Request
     public function rules()
     {
         return [
-            'name'   => 'required',
-            'email'  => 'sometimes|required|email',
-            'avatar' => 'image',
+            'name'      => 'required',
+            'email'     => 'sometimes|required|email',
+            'avatar'    => 'image',
+            'tel'       => [
+                'string',
+                'max:16',
+                'regex:#^1[34578]\d{9}$#',
+            ],
+            'qq'        => [
+                'string',
+                'max:10',
+                'min:5',
+                'regex:#^\d+$#',
+            ],
+            'birthday'  => 'date',
+            'id_number' => [
+                'nullable',
+                'string',
+                'size:18',
+                'regex:#(^\d{18}$)|(^\d{17}(\d|X|x)$)#',
+            ],
         ];
     }
 }
