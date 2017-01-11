@@ -49,29 +49,29 @@ return [
             'system' => 'System',
         ],
     ],
-
-    'language-picker' => [
-        'language' => 'Language',
-        /**
-         * Add the new language to this array.
-         * The key should have the same language code as the folder name.
-         * The string should be: 'Language-name-in-your-own-language (Language-name-in-English)'.
-         * Be sure to add the new language in alphabetical order.
-         */
-        'langs' => [
-            'ar' => 'Arabic',
-            'da' => 'Danish',
-            'de' => 'German',
-            'el' => 'Greek',
-            'en' => 'English',
-            'es' => 'Spanish',
-            'fr' => 'French',
-            'it' => 'Italian',
-            'nl' => 'Dutch',
-            'pt_BR' => 'Brazilian Portuguese',
-            'sv' => 'Swedish',
-            'th' => 'Thai',
-            'zh' => 'Chinese',
-        ],
-    ],
+//
+//    'language-picker' => [
+//        'language' => 'Language',
+//        /**
+//         * Add the new language to this array.
+//         * The key should have the same language code as the folder name.
+//         * The string should be: 'Language-name-in-your-own-language (Language-name-in-English)'.
+//         * Be sure to add the new language in alphabetical order.
+//         */
+//        'langs' => [
+//            'ar' => 'Arabic',
+//            'da' => 'Danish',
+//            'de' => 'German',
+//            'el' => 'Greek',
+//            'en' => 'English',
+//            'es' => 'Spanish',
+//            'fr' => 'French',
+//            'it' => 'Italian',
+//            'nl' => 'Dutch',
+//            'pt_BR' => 'Brazilian Portuguese',
+//            'sv' => 'Swedish',
+//            'th' => 'Thai',
+//            'zh' => 'Chinese',
+//        ],
+//    ],
 ];

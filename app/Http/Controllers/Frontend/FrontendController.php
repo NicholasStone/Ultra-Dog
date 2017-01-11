@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Auth;
 use App\Http\Controllers\Controller;
 
 /**
@@ -18,11 +19,11 @@ class FrontendController extends Controller
 		return view('frontend.index');
 	}
 
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function macros()
-	{
-		return view('frontend.macros');
-	}
+//	/**
+//	 * @return \Illuminate\View\View
+//	 */
+//	public function macros()
+//	{
+//		return view('frontend.macros');
+//	}
 }

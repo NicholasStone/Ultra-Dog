@@ -14,22 +14,25 @@ return [
     */
 
     'general' => [
-        'home' => 'Home',
-        'logout' => 'Logout',
+        'home'   => '首页',
+        'logout' => '注销',
     ],
 
     'frontend' => [
-        'dashboard' => 'Dashboard',
-        'login' => 'Login',
-        'macros' => 'Macros',
-        'register' => 'Register',
+        'dashboard' => '控制台',
+        'login'     => '登陆',
+//        'macros' => 'Macros',
+        'register'  => '注册',
+        'jobs'      => [
+            'create' => '发布兼职',
+        ],
 
         'user' => [
-			'account' => 'My Account',
-            'administration' => 'Administration',
-            'change_password' => 'Change Password',
-            'my_information' => 'My Information',
-			'profile' => 'Profile',
+            'account'         => '我的账户',
+            'administration'  => '管理员',
+            'change_password' => '修改密码',
+            'my_information'  => '我的信息',
+            'profile'         => '账户信息',
         ],
     ],
 ];

@@ -1,7 +1,7 @@
 <?php
 Route::group([
     'namespace' => 'Job',
-    'as'        => 'jobs',
+    'as'        => 'jobs.',
 ], function () {
     Route::resource('jobs', 'JobsController', [
         'names' => [

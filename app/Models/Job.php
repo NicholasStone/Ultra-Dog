@@ -11,11 +11,11 @@ class Job extends Model
     use SoftDeletes;
     public $fillable = [
         'title',
-        'publisher',
-        'status',
         'reward',
         'describe',
         'start_at',
+        'max_hire',
+        'location',
         'maintain',
         'work_hours_pre_day',
         'cover',
@@ -26,7 +26,7 @@ class Job extends Model
 
     public function publisher()
     {
-        return $this->belongsTo(User::class, 'publisher');
+        return $this->belongsTo(User::class, 'publisher_id');
     }
 
     public function employees()

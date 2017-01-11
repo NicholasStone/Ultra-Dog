@@ -21,8 +21,8 @@ return [
         'actions'           => 'Actions',
         'active'            => 'Active',
         'buttons'           => [
-            'save'   => 'Save',
-            'update' => 'Update',
+            'save'   => '保存',
+            'update' => '更新',
         ],
         'hide'              => 'Hide',
         'inactive'          => 'Inactive',
@@ -117,30 +117,16 @@ return [
             'send_password_reset_link_button' => 'Send Password Reset Link',
         ],
 
-        'macros' => [
-            'country' => [
-                'alpha'   => 'Country Alpha Codes',
-                'alpha2'  => 'Country Alpha 2 Codes',
-                'alpha3'  => 'Country Alpha 3 Codes',
-                'numeric' => 'Country Numeric Codes',
-            ],
-
-            'macro_examples' => 'Macro Examples',
-
-            'state' => [
-                'mexico' => 'Mexico State List',
-                'us'     => [
-                    'us'       => 'US States',
-                    'outlying' => 'US Outlying Territories',
-                    'armed'    => 'US Armed Forces',
-                ],
-            ],
-
-            'territories' => [
-                'canada' => 'Canada Province & Territories List',
-            ],
-
-            'timezone' => '时区',
+        'job' => [
+            'title'              => '工作名称',
+            'reward'             => '薪酬',
+            'describe'           => '详情',
+            'start_at'           => '开始时间',
+            'maintain'           => '持续时间',
+            'work_hours_pre_day' => '每日工作时长',
+            'cover'              => '封面',
+            'max_hire'           => '最大招聘人数',
+            'location'           => '工作地点',
         ],
 
         'user' => [

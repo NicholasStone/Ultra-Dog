@@ -15,6 +15,9 @@
             {{--<ul class="nav navbar-nav">--}}
                 {{--<li>{{ link_to_route('frontend.macros', trans('navs.frontend.macros')) }}</li>--}}
             {{--</ul>--}}
+            <ul class="nav navbar-nav">
+                <li>{{ link_to_route('frontend.jobs.create', trans('navs.frontend.jobs.create')) }}</li>
+            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 {{--@if (config('locale.status') && count(config('locale.languages')) > 1)--}}

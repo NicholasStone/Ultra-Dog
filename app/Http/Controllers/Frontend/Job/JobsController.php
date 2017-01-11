@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers\Frontend\Job;
 
-use App\Models\Job;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Frontend\Job\JobRepository;
+use App\Http\Requests\Frontend\Job\JobEditRequest;
 
 class JobsController extends Controller
 {
     protected $job;
 
-    public function __construct(Job $job)
+    public function __construct(JobRepository $job)
     {
         $this->job = $job;
+
+        $this->middleware('job', ['except' => ['index', 'destroy']]);
+
+        $this->middleware('admin', ['only' => ['destroy']]);
     }
 
 
@@ -33,18 +39,22 @@ class JobsController extends Controller
      */
     public function create()
     {
-        return view("frontend.jobs.create");
+        return view("frontend.jobs.edit")->withJob(null)->withEdit(false);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
+     * @middleware("job")
+     * @param JobEditRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JobEditRequest $request)
     {
-        //
+        $this->job->create($request);
+
+        return redirect()
+            ->route('frontend.user.account')
+            ->withFlashSuccess(trans('alerts.frontend.jobs.publish.success'));
     }
 
     /**
@@ -55,7 +65,7 @@ class JobsController extends Controller
      */
     public function show($id)
     {
-        return view("frontend.jobs.show");
+        return view("frontend.jobs.show")->withJob($this->job->find($id));
     }
 
     /**
@@ -66,7 +76,7 @@ class JobsController extends Controller
      */
     public function edit($id)
     {
-        return view("frontend.jobs.edit");
+        return view("frontend.jobs.edit")->withJob($this->job->find($id))->withEdit(true);
     }
 
     /**
@@ -78,7 +88,7 @@ class JobsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        return $this->job->updateJob($request, $id);
     }
 
     /**

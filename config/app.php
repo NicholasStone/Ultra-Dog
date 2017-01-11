@@ -187,8 +187,9 @@ return [
 		Yajra\Datatables\DatatablesServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
+
 		/*
-		 * Has to override the Collective\Html\HtmlServiceProvider form singleton
+		 * Has to override the Collective's ServiceProvider singleton
 		 */
 		App\Providers\MacroServiceProvider::class,
 

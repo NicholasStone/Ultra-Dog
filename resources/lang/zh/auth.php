@@ -13,11 +13,12 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'general_error' => 'You do not have access to do that.',
-    'socialite' => [
-        'unacceptable' => ':provider is not an acceptable login type.',
+    'failed'        => '您输入的信息有误。',
+    'general_error' => '您没有此权限。',
+    'socialite'     => [
+        'unacceptable' => ':provider 不被支持。',
     ],
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'unknown' => 'An unknown error occurred',
+    'throttle'      => '尝试次数过多，请于 :seconds 秒后重试。',
+    'unknown'       => '抱歉，系统出现异常，请联系客服。',
+    'unauthorized'  => '请登陆',
 ];

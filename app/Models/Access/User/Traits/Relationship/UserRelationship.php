@@ -3,6 +3,7 @@
 namespace App\Models\Access\User\Traits\Relationship;
 
 use App\Models\Access\User\SocialLogin;
+use App\Models\Job;
 
 /**
  * Class UserRelationship
@@ -27,5 +28,15 @@ trait UserRelationship
     public function providers()
     {
         return $this->hasMany(SocialLogin::class);
+    }
+
+    public function jobPublished()
+    {
+        return $this->hasMany(Job::class, 'publisher_id');
+    }
+
+    public function jobInvolved()
+    {
+        return $this->belongsToMany(Job::class, 'employees');
     }
 }
