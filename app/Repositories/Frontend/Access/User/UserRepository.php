@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Frontend\Access\User;
 
+use App\Helpers\Auth\Auth;
 use App\Models\Access\User\User;
 use App\Repositories\Repository;
 use Illuminate\Http\UploadedFile;

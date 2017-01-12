@@ -31,7 +31,12 @@ class Job extends Model
 
     public function employees()
     {
-        return $this->hasManyThrough(User::class, Employee::class);
+        return $this->hasManyThrough(User::class, Employee::class, 'job_id', 'id');
+    }
+
+    public function enrolls()
+    {
+        return $this->hasMany(Employee::class);
     }
 
     public function tags()

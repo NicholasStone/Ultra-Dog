@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Job;
 
+use App\Repositories\Frontend\Job\EmployeeRepository;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,12 +12,15 @@ use App\Http\Requests\Frontend\Job\JobEditRequest;
 class JobsController extends Controller
 {
     protected $job;
+    protected $employee;
 
-    public function __construct(JobRepository $job)
+    public function __construct(JobRepository $job, EmployeeRepository $employeeRepository)
     {
         $this->job = $job;
 
-        $this->middleware('job', ['except' => ['index', 'destroy']]);
+        $this->employee = $employeeRepository;
+
+        $this->middleware('needs-complete-info', ['except' => ['index', 'destroy']]);
 
         $this->middleware('admin', ['only' => ['destroy']]);
     }
@@ -29,7 +33,8 @@ class JobsController extends Controller
      */
     public function index()
     {
-        return view("frontend.jobs.index");
+        return redirect()
+            ->route("frontend.index");
     }
 
     /**
@@ -65,7 +70,9 @@ class JobsController extends Controller
      */
     public function show($id)
     {
-        return view("frontend.jobs.show")->withJob($this->job->find($id));
+        return view("frontend.jobs.show")
+            ->withEnrolled(empty($this->employee->isEnrolled($id)) ? false : true)
+            ->withJob($this->job->find($id));
     }
 
     /**

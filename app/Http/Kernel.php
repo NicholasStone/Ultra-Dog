@@ -74,6 +74,6 @@ class Kernel extends HttpKernel
         /**
          * Jobs Middleware
          */
-        'job'                         => \App\Http\Middleware\JobSubmit::class,
+        'needs-complete-info'                         => \App\Http\Middleware\InfoNeedsComplete::class,
     ];
 }

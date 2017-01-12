@@ -27,7 +27,7 @@ class JobEditRequest extends FormRequest
             'title'              => 'required|max:50',
             'reward'             => [
                 'required',
-                'regex:^\d{1,8}\.\d{0,2}$',
+//                'regex:^\d{1,8}\.\d{0,2}$',
             ],
             'describe'           => 'required|min:50|max:500',
             'start_at'           => 'required|date',

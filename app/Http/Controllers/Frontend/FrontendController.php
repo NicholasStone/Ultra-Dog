@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Job;
+use App\Repositories\Frontend\Job\JobRepository;
 use Auth;
 use App\Http\Controllers\Controller;
 
@@ -11,13 +13,14 @@ use App\Http\Controllers\Controller;
  */
 class FrontendController extends Controller
 {
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function index()
-	{
-		return view('frontend.index');
-	}
+    /**
+     * @param JobRepository $job
+     * @return \Illuminate\View\View
+     */
+    public function index(JobRepository $job)
+    {
+        return view('frontend.index')->withJobs($job->paginate(9));
+    }
 
 //	/**
 //	 * @return \Illuminate\View\View

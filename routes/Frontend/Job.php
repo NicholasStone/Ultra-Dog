@@ -14,4 +14,12 @@ Route::group([
             'destroy' => 'destroy',
         ],
     ]);
+
+    Route::group([
+        'middleware' => 'needs-complete-info',
+        'prefix'     => 'job',
+    ], function () {
+        Route::get('/enroll/{id}', 'EmployController@enroll')->name('enroll');
+        Route::get('/hire/{id}','EmployController@hire')->name('hire');
+    });
 });

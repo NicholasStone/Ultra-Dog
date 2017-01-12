@@ -6,7 +6,7 @@ use Auth;
 use Closure;
 use DebugBar\DebugBar;
 
-class JobSubmit
+class InfoNeedsComplete
 {
     /**
      * Handle an incoming request.

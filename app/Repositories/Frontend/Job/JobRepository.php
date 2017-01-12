@@ -9,7 +9,7 @@
 namespace app\Repositories\Frontend\Job;
 
 
-use App\Helpers\Auth\Auth;
+use Auth;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use App\Repositories\Repository;
@@ -26,9 +26,14 @@ class JobRepository extends Repository
         $this->job = $job;
     }
 
+    /**
+     * @param Request $request
+     * @return JobRepository
+     */
     public function create(Request $request)
     {
-        $input           = $request->only([
+        $job = self::MODEL;
+        $input = $request->only([
             'title',
             'reward',
             'describe',
@@ -39,11 +44,11 @@ class JobRepository extends Repository
             'work_hours_pre_day',
         ]);
         $input['reward'] = number_format($input['reward'], 2, '.', '');
-        $input['cover']  = Storage::url($request->file('cover')->store('public/jobs'));
-        $job             = new Job();
+        $input['cover'] = Storage::url($request->file('cover')->store('public/jobs'));
+        $job = new $job();
         $job->fill($input);
         $job->publisher_id = Auth::user()->id;
-        $job->status       = 0;
+        $job->status = 0;
         $job->save();
 
         return $job;
@@ -51,7 +56,7 @@ class JobRepository extends Repository
 
     public function updateJob(Request $request, $id)
     {
-        $input           = $request->only([
+        $input = $request->only([
             'title',
             'reward',
             'describe',
@@ -78,5 +83,10 @@ class JobRepository extends Repository
     public function findInvolvedByUser()
     {
         return Auth::user()->jobInvolved;
+    }
+
+    public function paginate($item_pre_page = 8)
+    {
+        return $this->job->paginate($item_pre_page);
     }
 }

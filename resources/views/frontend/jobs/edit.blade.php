@@ -6,7 +6,7 @@
             兼职信息发布
         </header>
         <main class="panel-body">
-            {{ Form::model($job,['route' => $edit?['frontend.jobs.update',$job->id]:'frontend.jobs.store', 'class' => 'form-horizontal', 'method' => 'PATCH', 'enctype' => 'multipart/form-data', 'id' => 'job-form']) }}
+            {{ Form::model($job,['route' => $edit?['frontend.jobs.update',$job->id]:'frontend.jobs.store', 'class' => 'form-horizontal', 'method' => $edit?'PATCH':'post', 'enctype' => 'multipart/form-data', 'id' => 'job-form']) }}
             <div class="form-group">
                 {{ Form::label('title', trans('labels.frontend.job.title') ,['class' => 'col-md-4 control-label']) }}
                 <div class="col-md-6">
