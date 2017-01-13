@@ -1,7 +1,8 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#frontend-navbar-collapse">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#frontend-navbar-collapse">
                 <span class="sr-only">{{ trans('labels.general.toggle_navigation') }}</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -13,49 +14,59 @@
 
         <div class="collapse navbar-collapse" id="frontend-navbar-collapse">
             {{--<ul class="nav navbar-nav">--}}
-                {{--<li>{{ link_to_route('frontend.macros', trans('navs.frontend.macros')) }}</li>--}}
+            {{--<li>{{ link_to_route('frontend.macros', trans('navs.frontend.macros')) }}</li>--}}
             {{--</ul>--}}
             <ul class="nav navbar-nav">
-                <li>{{ link_to_route('frontend.jobs.create', trans('navs.frontend.jobs.create')) }}</li>
+                {{--<li>{{ link_to_route('frontend.jobs.create', '',[], ['class' => 'nav-link']) }}</li>--}}
+                <li>
+                    <a href="{{ route('frontend.jobs.create') }}" class="nav-link">
+                        <i class="fa fa-usd" aria-hidden="true"></i>
+                    </a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 {{--@if (config('locale.status') && count(config('locale.languages')) > 1)--}}
-                    {{--<li class="dropdown">--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
-                            {{--{{ trans('menus.language-picker.language') }}--}}
-                            {{--<span class="caret"></span>--}}
-                        {{--</a>--}}
+                {{--<li class="dropdown">--}}
+                {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
+                {{--{{ trans('menus.language-picker.language') }}--}}
+                {{--<span class="caret"></span>--}}
+                {{--</a>--}}
 
-                        {{--@include('includes.partials.lang')--}}
-                    {{--</li>--}}
+                {{--@include('includes.partials.lang')--}}
+                {{--</li>--}}
                 {{--@endif--}}
 
                 @if ($logged_in_user)
-                    <li>{{ link_to_route('frontend.user.dashboard', trans('navs.frontend.dashboard')) }}</li>
+                    {{--                    <li>{{ link_to_route('frontend.user.dashboard', '<i class="fa fa-cog" aria-hidden="true"</i>',[], ['class' => 'nav-link']) }}</li>--}}
+                    <li><a href="{{ route('frontend.user.dashboard') }}" class="nav-link"><i class="fa fa-cog"
+                                                                                             aria-hidden="true"></i></a>
+                    </li>
                 @endif
 
                 @if (! $logged_in_user)
                     <li>{{ link_to_route('frontend.auth.login', trans('navs.frontend.login')) }}</li>
-
                     @if (config('access.users.registration'))
                         <li>{{ link_to_route('frontend.auth.register', trans('navs.frontend.register')) }}</li>
                     @endif
                 @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ $logged_in_user->name }} <span class="caret"></span>
-                        </a>
+                    {{--<li class="dropdown">--}}
+                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
+                    {{--{{ $logged_in_user->name }} <span class="caret"></span>--}}
+                    {{--</a>--}}
 
-                        <ul class="dropdown-menu" role="menu">
-                            @permission('view-backend')
-                                <li>{{ link_to_route('admin.dashboard', trans('navs.frontend.user.administration')) }}</li>
-                            @endauth
+                    {{--<ul class="dropdown-menu" role="menu">--}}
+                    @permission('view-backend')
+                    {{--                            <li>{{ link_to_route('admin.dashboard', trans('navs.frontend.user.administration'),[], ['class' => 'nav-link']) }}</li>--}}
+                    <li><a href="{{ route('admin.dashboard') }}"></a></li>
+                    @endauth
 
-                            <li>{{ link_to_route('frontend.user.account', trans('navs.frontend.user.account')) }}</li>
-                            <li>{{ link_to_route('frontend.auth.logout', trans('navs.general.logout')) }}</li>
-                        </ul>
-                    </li>
+{{--                    <li>{{ link_to_route('frontend.user.account', trans('navs.frontend.user.account')) }}</li>--}}
+                <li><a href="{{ route('frontend.user.account') }}" class="nav-link"><i class="fa fa-user-o"></i></a></li>
+                    {{--<li>{{ link_to_route('frontend.auth.logout', trans('navs.general.logout')) }}</li>--}}
+                <li><a href="{{ route('frontend.auth.logout') }}" class="nav-link"><i class="fa fa-power-off"></i></a></li>
+                    {{--</ul>--}}
+                    {{--</li>--}}
                 @endif
             </ul>
         </div><!--navbar-collapse-->

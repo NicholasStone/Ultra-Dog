@@ -19,7 +19,7 @@ class FrontendController extends Controller
      */
     public function index(JobRepository $job)
     {
-        return view('frontend.index')->withJobs($job->paginate(9));
+        return view('frontend.index')->withJobs($job->paginate(7));
     }
 
 //	/**

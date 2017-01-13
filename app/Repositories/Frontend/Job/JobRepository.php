@@ -6,7 +6,7 @@
  * Time: 下午3:44
  */
 
-namespace app\Repositories\Frontend\Job;
+namespace App\Repositories\Frontend\Job;
 
 
 use Auth;
@@ -87,6 +87,11 @@ class JobRepository extends Repository
 
     public function paginate($item_pre_page = 8)
     {
-        return $this->job->paginate($item_pre_page);
+        return $this->job->orderBy('created_at', 'desc')->paginate($item_pre_page);
+    }
+
+    public function findAll()
+    {
+        return $this->query()->get();
     }
 }

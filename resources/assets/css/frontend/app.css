@@ -11089,6 +11089,21 @@ button.close {
   border-radius: 0;
 }
 
+body {
+  background-image: url("/img/frontend/background.png");
+  padding-top: 70px;
+}
+
+.navbar .nav-link {
+  background-color: #4d4d4d;
+  padding-top: 5px !important;
+  padding-left: 8px !important;
+  margin: 10px 10px;
+  width: 30px;
+  height: 30px;
+  font-size: large;
+}
+
 body.stop-scrolling {
   height: 100%;
   overflow: hidden;
